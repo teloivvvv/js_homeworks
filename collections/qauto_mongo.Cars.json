@@ -1,0 +1,65 @@
+[{
+  "_id": {
+    "$oid": "685aa1e503a5ba2ce73dae95"
+  },
+  "userId": {
+    "$oid": "685aa0f403a5ba2ce73dae81"
+  },
+  "modelId": {
+    "$oid": "685aa19303a5ba2ce73dae90"
+  },
+  "number": "AA1234BC",
+  "mileage": 50000
+},
+{
+  "_id": {
+    "$oid": "685aa1e503a5ba2ce73dae96"
+  },
+  "userId": {
+    "$oid": "685aa0f403a5ba2ce73dae82"
+  },
+  "modelId": {
+    "$oid": "685aa19303a5ba2ce73dae91"
+  },
+  "number": "BB5678DE",
+  "mileage": 72000
+},
+{
+  "_id": {
+    "$oid": "685aa1e503a5ba2ce73dae97"
+  },
+  "userId": {
+    "$oid": "685aa0f403a5ba2ce73dae83"
+  },
+  "modelId": {
+    "$oid": "685aa19303a5ba2ce73dae92"
+  },
+  "number": "CC9012FG",
+  "mileage": 33000
+},
+{
+  "_id": {
+    "$oid": "685aa1e503a5ba2ce73dae98"
+  },
+  "userId": {
+    "$oid": "685aa0f403a5ba2ce73dae84"
+  },
+  "modelId": {
+    "$oid": "685aa19303a5ba2ce73dae93"
+  },
+  "number": "DD3456HI",
+  "mileage": 120000
+},
+{
+  "_id": {
+    "$oid": "685aa1e503a5ba2ce73dae99"
+  },
+  "userId": {
+    "$oid": "685aa0f403a5ba2ce73dae85"
+  },
+  "modelId": {
+    "$oid": "685aa19303a5ba2ce73dae94"
+  },
+  "number": "EE7890JK",
+  "mileage": 15000
+}]
