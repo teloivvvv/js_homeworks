@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "61e7b138-2626-453b-af2c-e6015e6d8239",
+		"name": "listingsAndReviews",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31061031",
+		"_collection_link": "https://speeding-eclipse-893609.postman.co/workspace/Hillel~3bc444e8-9de4-4e15-bdd6-ecd57eab6a2b/collection/31061031-61e7b138-2626-453b-af2c-e6015e6d8239?action=share&source=collection_link&creator=31061031"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Response is not empty\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.be.above(0);",
+							"});",
+							"",
+							"let jsonData;",
+							"",
+							"if (pm.response.code !== 201) {",
+							"    console.error(\"❌ Response is not 201. Halting script.\");",
+							"    postman.setNextRequest(null); ",
+							"} else {",
+							"    jsonData = pm.response.json();",
+							"",
+							"    if (jsonData._id) {",
+							"        pm.collectionVariables.set(\"new_id\", jsonData._id);",
+							"        ",
+							"    } else {",
+							"        console.warn(\"_id not found in response.\");",
+							"    }",
+							"    if (jsonData.createdAt) {",
+							"        pm.collectionVariables.set(\"created_At\", jsonData.createdAt);",
+							"        ",
+							"    } else {",
+							"        console.warn(\"createdAt not found in response.\");",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Data is object\", function () {",
+							"    pm.expect(jsonData).to.be.an(\"object\"); ",
+							"});",
+							"",
+							"pm.test(\"Response contains createdAt field\", function () {",
+							"    pm.expect(jsonData.createdAt).to.be.a(\"string\");",
+							"});",
+							"",
+							"pm.test(\"createdAt matches ISO format\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.createdAt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/listingsAndReviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"listingsAndReviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response _id equals collection variable new_id\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const expectedId = pm.collectionVariables.get(\"new_id\");",
+							"",
+							"    pm.expect(jsonData._id).to.eql(expectedId);",
+							"});",
+							"",
+							"pm.test(\"Response createdAt equals collection variable created_At\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const expectedTime = pm.collectionVariables.get(\"created_At\");",
+							"",
+							"    pm.expect(jsonData.createdAt).to.eql(expectedTime);",
+							"});",
+							"",
+							"pm.test(\"Data is object\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\"); ",
+							"});",
+							"",
+							"pm.test(\"Response contains createdAt field\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.createdAt).to.be.a(\"string\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/listingsAndReviews/{{new_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"listingsAndReviews",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response _id equals collection variable new_id\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const expectedId = pm.collectionVariables.get(\"new_id\");",
+							"",
+							"    pm.expect(jsonData._id).to.eql(expectedId);",
+							"});",
+							"",
+							"pm.test(\"Response createdAt equals collection variable created_At\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const expectedTime = pm.collectionVariables.get(\"created_At\");",
+							"",
+							"    pm.expect(jsonData.createdAt).to.eql(expectedTime);",
+							"});",
+							"",
+							"pm.test(\"Data is object\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\"); ",
+							"});",
+							"",
+							"pm.test(\"Response contains createdAt field\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.createdAt).to.be.a(\"string\");",
+							"});",
+							"",
+							"pm.test(\"updatedAt matches ISO format\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.updatedAt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);",
+							"});",
+							"",
+							"pm.test(\"updatedAt is not equal to createdAt\", function () {",
+							"    const jsonData = pm.response.json();",
+							"",
+							"    pm.expect(jsonData.updatedAt).to.not.eql(jsonData.createdAt);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/listingsAndReviews/{{new_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"listingsAndReviews",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is not empty\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has confirmation message\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Документ видалено\");",
+							"});",
+							"",
+							"pm.test(\"deletedDocument contains correct ID\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.deletedDocument._id).to.eql(pm.collectionVariables.get(\"new_id\"));",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/listingsAndReviews/{{new_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"listingsAndReviews",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Failed delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Response is not empty\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has confirmation message\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Документ не знайдено\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/listingsAndReviews/{{new_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"listingsAndReviews",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "new_id",
+			"value": ""
+		},
+		{
+			"key": "created_At",
+			"value": ""
+		}
+	]
+}
